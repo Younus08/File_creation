@@ -1,18 +1,22 @@
 #!/bin/bash
 
+#instructions of the program.
 if [[ "$#" -eq 0 ]]; then
     echo "Enter the file name as first argument "
     echo "Enter 'o' as second argument IF you want to open the file "
     echo -e "You CAN pass text editor name as third argument,to edit the file.\n(Default Nano) "
 fi
 
+#available text editors.
 text_editors=("Vim" "Neovim" "Nano" "gedit" "Kate" "Mousepad")
 
+#creating the file.
 if [[ -n "$1" ]];then 
 	file_name="$1"
 	touch $file_name
 fi
 
+#editing the file based on the extension.
 if [[ $file_name = *.sh ]]; then	
 	echo "#!/bin/bash" > $file_name
 	chmod +x $file_name
@@ -23,9 +27,9 @@ elif [[ $file_name = *.py ]]; then
 	echo "~~ Python file created ~~"
 elif [[ $file_name = *.c ]]; then
 	echo "~~ C file created ~~"
-
 fi
 
+#opening the file.
 if [[ $2 = o ]]; then
 	echo "Opening file"
 	if [[ -z "$3" ]]; then
